@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+     <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+    <div class="wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-tachometer-alt"></i> ProDash
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-page="page-dashboard"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="page-settings"><i class="fas fa-cog"></i> Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="page-profile"><i class="fas fa-user"></i> Profile</a>
+                </li>
+            </ul>
+            <div class="theme-toggle-container">
+                <div id="theme-toggle">
+                    <a class="nav-link" href="#">
+                        <i id="theme-icon" class="fas fa-moon"></i> <span id="theme-text">Dark Mode</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button id="sidebar-toggle"><i class="fas fa-bars"></i></button>
+                <h2 class="h4 mb-0 ms-3">Welcome back, <span id="profile-name-header">User</span>!</h2>
+            </header>
+
+            <!-- DASHBOARD PAGE -->
+            <div id="page-dashboard" class="page active">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-newspaper"></i>Latest News (US)</h2>
+                            <div id="news-feed" class="list-group list-group-flush" style="max-height: 400px; overflow-y: auto;"></div>
+                            <div id="news-error" class="text-danger"></div>
+                        </div>
+                        <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-list-check"></i>To-Do List</h2>
+                            <div class="input-group mb-3">
+                                <input type="text" id="todo-input" class="form-control" placeholder="Add a new task...">
+                                <button id="add-todo-btn" class="btn btn-primary">Add</button>
+                            </div>
+                            <ul id="todo-list" class="list-unstyled" style="max-height: 200px; overflow-y: auto;"></ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-clock"></i>Date & Time</h2>
+                            <div id="datetime" class="fs-4 fw-light text-center"></div>
+                        </div>
+                        <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-cloud-sun"></i>Weather</h2>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="city-input" placeholder="Enter City">
+                                <button class="btn btn-primary" id="get-weather-btn"><i class="fas fa-search"></i></button>
+                            </div>
+                            <div id="weather-info" class="text-center">
+                                <img id="weather-icon" src="" alt="" style="width: 70px; height: 70px;">
+                                <h3 id="city-name" class="fs-5"></h3>
+                                <p id="temperature" class="fs-3 fw-bold mb-0"></p>
+                                <p id="description" class="text-capitalize"></p>
+                                <div id="weather-error" class="text-danger"></div>
+                            </div>
+                        </div>
+                        <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-coins"></i>Crypto Prices</h2>
+                            <div id="crypto-feed" style="max-height: 150px; overflow-y: auto;"></div>
+                            <div id="crypto-error" class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-lg-8">
+                         <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-link"></i>Quick Links</h2>
+                            <div id="quick-links-grid" class="quick-links-grid"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-quote-left"></i>Quote of the Day</h2>
+                            <blockquote class="blockquote">
+                                <p id="quote" class="fs-6"></p>
+                                <figcaption class="blockquote-footer text-end">
+                                    <cite id="quote-author"></cite>
+                                </figcaption>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SETTINGS PAGE -->
+            <div id="page-settings" class="page">
+                <h2 class="h4 mb-4">Settings</h2>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-key"></i>API Keys</h2>
+                            <form id="api-keys-form">
+                                <div class="mb-3">
+                                    <label for="weather-api-key" class="form-label">OpenWeatherMap API Key</label>
+                                    <input type="password" class="form-control" id="weather-api-key" placeholder="Enter key">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="news-api-key" class="form-label">NewsAPI.org API Key</label>
+                                    <input type="password" class="form-control" id="news-api-key" placeholder="Enter key">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save API Keys</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-palette"></i>Appearance</h2>
+                             <form id="appearance-form">
+                                <div class="mb-3">
+                                    <label for="bg-image-url" class="form-label">Background Image URL</label>
+                                    <input type="text" id="bg-image-url" class="form-control" placeholder="Paste image URL...">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Set Background</button>
+                                <button type="button" id="clear-bg-btn" class="btn btn-secondary">Clear Background</button>
+                            </form>
+                        </div>
+                         <div class="widget">
+                            <h2 class="widget-title"><i class="fas fa-database"></i>Data Management</h2>
+                            <p>This will clear all your saved data, including to-dos, links, and settings.</p>
+                            <button id="clear-data-btn" class="btn btn-danger">Clear All Local Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFILE PAGE -->
+            <div id="page-profile" class="page">
+                <h2 class="h4 mb-4">User Profile</h2>
+                 <div class="widget">
+                    <form id="profile-form">
+                        <div class="mb-3">
+                            <label for="profile-name" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="profile-name" placeholder="Enter your name">
+                        </div>
+                         <div class="mb-3">
+                            <label for="profile-bio" class="form-label">Short Bio</label>
+                            <textarea class="form-control" id="profile-bio" rows="3" placeholder="Tell us a little about yourself..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Profile</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <div class="sidebar-overlay"></div>
+    </div>
+
+    <!-- Quick Link Modal -->
+    <div class="modal fade" id="quickLinkModal" tabindex="-1" aria-labelledby="quickLinkModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="quickLinkModalLabel">Add/Edit Quick Link</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="quickLinkForm">
+              <input type="hidden" id="link-id">
+              <div class="mb-3">
+                <label for="link-name" class="form-label">Link Name</label>
+                <input type="text" class="form-control" id="link-name" required>
+              </div>
+              <div class="mb-3">
+                <label for="link-url" class="form-label">URL</label>
+                <input type="url" class="form-control" id="link-url" placeholder="https://example.com" required>
+              </div>
+              <div class="mb-3">
+                <label for="link-icon" class="form-label">Font Awesome Icon Class</label>
+                <input type="text" class="form-control" id="link-icon" placeholder="e.g., fab fa-google">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger me-auto" id="delete-link-btn">Delete</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" form="quickLinkForm">Save Link</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="./script.js"></script>
+</body>
+</html>
