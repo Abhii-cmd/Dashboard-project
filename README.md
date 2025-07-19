@@ -2,7 +2,7 @@
 
 **ProDash** is a sleek, modern, and fully responsive personal dashboard built using only core web technologies (HTML, CSS, JavaScript). It serves as your all-in-one homepage—offering real-time weather, news, crypto tracking, task management, and more!
 
-🚀 **[Live Demo](#)**(https://abhii-cmd.github.io/Dashboard-project/))*
+**Demo** (https://abhii-cmd.github.io/Dashboard-project/))*
 
 ---
 
